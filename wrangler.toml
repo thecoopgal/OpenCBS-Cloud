@@ -1,0 +1,25 @@
+name = "opencbs-cloud"
+main = "src/worker.ts"
+compatibility_date = "2024-01-01"
+
+[vars]
+ENVIRONMENT = "production"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "opencbs_banking"
+database_id = "YOUR_D1_ID"  # You'll need to replace this
+
+[[r2_buckets]]
+binding = "DOCUMENTS"
+bucket_name = "opencbs-documents"
+preview_bucket_name = "opencbs-documents-dev"
+
+[triggers]
+crons = ["0 0 * * *"]  # Daily cron for scheduled tasks
+
+[env.production]
+workers_dev = false
+routes = [
+  { pattern = "api.yourdomain.com", custom_domain = true }
+] 
